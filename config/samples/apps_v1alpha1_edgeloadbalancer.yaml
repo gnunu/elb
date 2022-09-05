@@ -1,0 +1,6 @@
+apiVersion: apps.openyurt.io/v1alpha1
+kind: EdgeLoadBalancer
+metadata:
+  name: edgeloadbalancer-sample
+spec:
+  # TODO(user): Add fields here

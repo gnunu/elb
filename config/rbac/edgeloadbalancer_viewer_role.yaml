@@ -1,0 +1,20 @@
+# permissions for end users to view edgeloadbalancers.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: edgeloadbalancer-viewer-role
+rules:
+- apiGroups:
+  - apps.openyurt.io
+  resources:
+  - edgeloadbalancers
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - apps.openyurt.io
+  resources:
+  - edgeloadbalancers/status
+  verbs:
+  - get

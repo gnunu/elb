@@ -1,0 +1,16 @@
+domain: openyurt.io
+layout:
+- go.kubebuilder.io/v3
+projectName: elb
+repo: github.com/gnunu/elb
+resources:
+- api:
+    crdVersion: v1
+    namespaced: true
+  controller: true
+  domain: openyurt.io
+  group: apps
+  kind: EdgeLoadBalancer
+  path: github.com/gnunu/elb/api/v1alpha1
+  version: v1alpha1
+version: "3"

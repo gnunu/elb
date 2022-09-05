@@ -1,0 +1,7 @@
+apiVersion: apps.openyurt.io/v1alpha1
+kind: EdgeLoadBalancer
+metadata:
+  name: elb01
+spec:
+  usecase: face
+  devices: [gpu, cpu, vpu]
