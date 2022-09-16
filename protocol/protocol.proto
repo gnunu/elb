@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+option go_package = "./protocol";
+
+import "google/protobuf/timestamp.proto";
+
+message Endpoint {
+	string name = 1;
+	string ip = 2;
+	int32 port = 3;
+}
+
+message Usecase {
+	string name = 1;
+	string policy = 2;
+	string device = 3;
+	google.protobuf.Timestamp last_updated = 4;
+	repeated Endpoint endpoints = 5;
+}
+
+service ConWire{
+	rpc Push(Usecase) returns (Usecase) {}
+}
