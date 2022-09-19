@@ -1,0 +1,5 @@
+{
+	"usecase": "reid",
+	"device": "GPU,CPU",
+	"policy": "balanced"
+}
