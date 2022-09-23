@@ -63,7 +63,7 @@ test: manifests generate fmt vet envtest ## Run tests.
 .PHONY: build
 build: generate fmt vet ## Build manager binary.
 	go build -o bin/manager main.go
-	go build -o bin/elb_proxy proxy/elb_proxy.go proxy/grpc_server.go proxy/http_server.go
+	cd proxy && go build -o ../bin/elb_proxy
 
 .PHONY: run
 run: manifests generate fmt vet ## Run a controller from your host.

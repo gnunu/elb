@@ -1,5 +1,6 @@
 {
 	"usecase": "reid",
 	"device": "GPU,CPU",
-	"policy": "balanced"
+	"policy": "balanced",
+	"uri": "http://10.238.125.155/live"
 }
