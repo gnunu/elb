@@ -3,6 +3,8 @@ package usecase
 import (
 	"fmt"
 	"sync"
+
+	"k8s.io/klog"
 )
 
 type Usecase struct {
@@ -70,7 +72,7 @@ func (us *UsecaseSet) LookUp(name string) (Usecase, bool) {
 func (us *UsecaseSet) List() {
 	us.lock.Lock()
 	for k, v := range us.Usecases {
-		fmt.Printf("usecase %s: %v\n", k, v)
+		klog.Info(fmt.Sprintf("usecase %s: %v\n", k, v))
 	}
 	us.lock.Unlock()
 }

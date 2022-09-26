@@ -22,7 +22,7 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ConWireClient interface {
-	Push(ctx context.Context, in *Usecase, opts ...grpc.CallOption) (*Usecase, error)
+	Push(ctx context.Context, in *Usecase, opts ...grpc.CallOption) (*Response, error)
 }
 
 type conWireClient struct {
@@ -33,8 +33,8 @@ func NewConWireClient(cc grpc.ClientConnInterface) ConWireClient {
 	return &conWireClient{cc}
 }
 
-func (c *conWireClient) Push(ctx context.Context, in *Usecase, opts ...grpc.CallOption) (*Usecase, error) {
-	out := new(Usecase)
+func (c *conWireClient) Push(ctx context.Context, in *Usecase, opts ...grpc.CallOption) (*Response, error) {
+	out := new(Response)
 	err := c.cc.Invoke(ctx, "/ConWire/Push", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -46,7 +46,7 @@ func (c *conWireClient) Push(ctx context.Context, in *Usecase, opts ...grpc.Call
 // All implementations must embed UnimplementedConWireServer
 // for forward compatibility
 type ConWireServer interface {
-	Push(context.Context, *Usecase) (*Usecase, error)
+	Push(context.Context, *Usecase) (*Response, error)
 	mustEmbedUnimplementedConWireServer()
 }
 
@@ -54,7 +54,7 @@ type ConWireServer interface {
 type UnimplementedConWireServer struct {
 }
 
-func (UnimplementedConWireServer) Push(context.Context, *Usecase) (*Usecase, error) {
+func (UnimplementedConWireServer) Push(context.Context, *Usecase) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Push not implemented")
 }
 func (UnimplementedConWireServer) mustEmbedUnimplementedConWireServer() {}

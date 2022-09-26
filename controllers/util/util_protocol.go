@@ -12,10 +12,10 @@ import (
 )
 
 var (
-	addr = "localhost:55555"
+	addr = "localhost:55554"
 )
 
-func SendUseCase(usecase *protocol.Usecase) {
+func SendUsecase(usecase *protocol.Usecase) {
 	conn, err := grpc.Dial(addr, grpc.WithTransportCredentials(insecure.NewCredentials()))
 	if err != nil {
 		klog.Fatalf("did not connect: %v", err)
