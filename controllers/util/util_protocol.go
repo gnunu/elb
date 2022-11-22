@@ -2,7 +2,6 @@ package util
 
 import (
 	"context"
-	"fmt"
 	"time"
 
 	"github.com/gnunu/elb/protocol"
@@ -30,5 +29,5 @@ func SendUsecase(usecase *protocol.Usecase) {
 	if err != nil {
 		klog.Fatalf("could not push: %v", err)
 	}
-	klog.Info(fmt.Sprintf("Send: %v", usecase))
+	klog.Infof("Send: %v", usecase)
 }

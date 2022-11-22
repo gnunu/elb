@@ -9,6 +9,16 @@ message Usecase {
 	string endpoints = 5;
 }
 
+message NodeMetrics {
+	string name = 1;
+	string cpu = 2;
+	string cpu_used = 3;
+	string gpu = 4;
+	string gpu_used = 5;
+	string mem = 6;
+	string mem_used = 7;
+}
+
 message Response {
 	string result = 1;
 }

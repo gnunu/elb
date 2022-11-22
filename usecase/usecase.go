@@ -1,17 +1,23 @@
 package usecase
 
 import (
-	"fmt"
 	"sync"
 
 	"k8s.io/klog"
 )
 
+type Endpoint struct {
+	Node string
+	Pod  string
+	Addr string
+	Port string
+}
+
 type Usecase struct {
 	name      string
-	devices   []string // devices required
-	policy    string   // default policy
-	endpoints []string // the backends' urls
+	devices   []string   // devices required
+	policy    string     // default policy
+	endpoints []Endpoint // the backends
 }
 
 type UsecaseSet struct {
@@ -37,7 +43,7 @@ func NewRequest(name string, devices string, policy string, uri string) *Request
 	return r
 }
 
-func NewUsecase(name string, devices []string, policy string, endpoints []string) *Usecase {
+func NewUsecase(name string, devices []string, policy string, endpoints []Endpoint) *Usecase {
 	return &Usecase{
 		name:      name,
 		devices:   devices,
@@ -72,7 +78,7 @@ func (us *UsecaseSet) LookUp(name string) (Usecase, bool) {
 func (us *UsecaseSet) List() {
 	us.lock.Lock()
 	for k, v := range us.Usecases {
-		klog.Info(fmt.Sprintf("usecase %s: %v\n", k, v))
+		klog.Infof("usecase %s: %v\n", k, v)
 	}
 	us.lock.Unlock()
 }

@@ -47,14 +47,14 @@ func pickEndpoint(u usecase.Usecase, r *usecase.Request) (string, error) {
 
 //// route request to the right endpoint
 func serveUsecase(r *usecase.Request) bool {
-	klog.Info(fmt.Sprintf("serving request: %v", r))
-	klog.Info(fmt.Sprintf("usecases: %v", usecases))
+	klog.Infof("serving request: %v", r)
+	klog.Infof("usecases: %v", usecases)
 	u, ok := usecases.LookUp(r.Name)
 	if !ok {
-		klog.Info(fmt.Sprintf("usecase %s not found", r.Name))
+		klog.Infof("usecase %s not found", r.Name)
 		return false
 	}
-	klog.Info(fmt.Sprintf("serving usecase: %v", u))
+	klog.Infof("serving usecase: %v", u)
 	e, err := pickEndpoint(u, r)
 	if err == nil {
 		sendRequest(r, e)
@@ -83,9 +83,9 @@ func serveRequest(w http.ResponseWriter, r *http.Request) {
 		msg := fmt.Sprintf("%v", err)
 		http.Error(w, msg, http.StatusBadRequest)
 	}
-	klog.Info(fmt.Sprintf("%v", m))
-	klog.Info(fmt.Sprintf("%v", m["usecase"]))
-	klog.Info(fmt.Sprintf("%v", m["uri"]))
+	klog.Infof("%v", m)
+	klog.Infof("%v", m["usecase"])
+	klog.Infof("%v", m["uri"])
 	if m["usecase"] != "" {
 		req := usecase.NewRequest(m["usecase"], m["device"], m["policy"], m["uri"])
 		serveUsecase(req)
@@ -97,7 +97,7 @@ func StartHttpServer(done chan (struct{})) {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/request", serveRequest)
 
-	klog.Info(fmt.Sprintf("request server listening at %d", request_port))
+	klog.Infof("request server listening at %d", request_port)
 	err := http.ListenAndServe(fmt.Sprintf(":%d", request_port), mux)
 	klog.Error(fmt.Sprintf("Something fatal happened: %v", err))
 	close(done)
